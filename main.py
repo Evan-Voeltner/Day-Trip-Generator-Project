@@ -13,19 +13,19 @@ def select_random(given_list):
 
 
 
-def does_user_agree(current_key, current_item):
-    user_input = input(f'{current_item} has been selected as your {current_key}. Do you like this {current_key}? Enter y/n: ')
+def does_user_agree(given_response):
+    current_response = given_response
     input_is_valid = False
     user_likes_selection = False
 
     while input_is_valid != True:
-        if user_input != 'y' or user_input != 'n':
-            user_input = input('Your response was invalid, please only type a "y" or "n": ')
+        if current_response != 'y' or current_response != 'n':
+            given_response = input('Your response was invalid, please only type a "y" or "n": ')
             break
         else:
             input_is_valid = True
         
-    if user_input == 'y':
+    if given_response == 'y':
         user_likes_selection = True
         
     return user_likes_selection
@@ -37,7 +37,9 @@ def make_selection(current_category, current_category_list):
     selection_confirmed = False
 
     while selection_confirmed != True:
-        if does_user_agree(current_category, current_selection):
+        user_input = input(f'{current_selection} has been selected as your {current_category}. Do you like this {current_category}? Enter y/n: ')
+
+        if does_user_agree(user_input):
             print(f'{current_selection} has been selected as your {current_category}!')
             return({current_category : current_selection})
         else:
@@ -63,6 +65,8 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
         final_trip.update(make_selection('transportation', transportation_list))
         final_trip.update(make_selection('restraunt', restraunt_list))
         final_trip.update(make_selection('entertainment', entertainment_list))
+
+        print('Here is the trip we have made for you: ' + final_trip)
 
 
 
