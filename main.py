@@ -1,9 +1,9 @@
 import random
 
-list_of_destinations = ['Milwaukee', 'West Allis', 'Wisconsin Dells', 'Chicago', ]
+list_of_locations = ['Milwaukee', 'West Allis', 'Wisconsin Dells', 'Chicago', ]
 list_of_transportations = ['Bus', 'Airplane', 'Rental Car', 'Boat', 'Train', 'Blimp']
-list_of_restraunts = []
-list_of_entertainment = []
+list_of_restraunts = ['Mcdonalds', 'Wendys', 'In and Out', 'Carabas', 'Olgas Kitchen']
+list_of_entertainment = ['see a play', 'take a segway tour', 'explore a museum', 'take a hike', 'go to a party']
 
 
 
@@ -67,7 +67,12 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
         final_trip.update(make_selection('entertainment', entertainment_list))
 
         print('Here is the trip we have made for you: ' + final_trip)
-
+        user_response = input('Would you like to confirm your trip? Enter y/n: ')
+        
+        if does_user_agree(user_response):
+            print(f'Your trip has been confirmed! You will go to {final_trip.get("location")} on a {final_trip.get("transportation")}. There, you will{final_trip.get("entertainment")}, and afterwards go and eat at {final_trip.get("restraunt")}.')
+            trip_confirmed = True
+        
 
 
 
