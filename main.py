@@ -65,11 +65,11 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
         final_trip.update(make_selection('restraunt', restraunt_list))
         final_trip.update(make_selection('entertainment', entertainment_list))
 
-        print('Here is the trip we have made for you: ' + final_trip)
+        print('Here is the trip we have made for you: ' + str(final_trip))
         user_response = input('Would you like to confirm your trip? Enter y/n: ')
         
         if does_user_agree(user_response):
-            print(f'Your trip has been confirmed! You will go to {final_trip.get("location")} on a {final_trip.get("transportation")}. There, you will{final_trip.get("entertainment")}, and afterwards go and eat at {final_trip.get("restraunt")}.')
+            print(f'Your trip has been confirmed! You will go to {final_trip.get("location")} on a {final_trip.get("transportation")}. There, you will {final_trip.get("entertainment")}, and afterwards go and eat at {final_trip.get("restraunt")}.')
             trip_confirmed = True
         
 
