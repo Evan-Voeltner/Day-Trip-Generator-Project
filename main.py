@@ -12,7 +12,6 @@ def select_random(given_list):
     return(selected_item.pop())
 
 
-
 def does_user_agree(given_response):
     current_response = given_response
     input_is_valid = False
@@ -30,7 +29,6 @@ def does_user_agree(given_response):
     return user_likes_selection
 
 
-
 def make_selection(current_category, current_category_list):
     current_selection = select_random(current_category_list)
     selection_confirmed = False
@@ -46,8 +44,14 @@ def make_selection(current_category, current_category_list):
             current_selection = select_random(current_category_list)
 
 
-
 def create_trip(location_list, transportation_list, restraunt_list, entertainment_list):
+    category_lists = {
+    'location': location_list,
+    'transportation' : transportation_list,
+    'restraunt': restraunt_list,
+    'entertainment': entertainment_list
+    }
+    
     final_trip = {
     'location': '',
     'transportation' : '',
@@ -58,21 +62,31 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
     trip_confirmed = False
 
     print('We will plan your trip for you!')
+        
+    final_trip.update(make_selection('location', location_list))
+    final_trip.update(make_selection('transportation', transportation_list))
+    final_trip.update(make_selection('restraunt', restraunt_list))
+    final_trip.update(make_selection('entertainment', entertainment_list))
 
     while trip_confirmed != True:
-        final_trip.update(make_selection('location', location_list))
-        final_trip.update(make_selection('transportation', transportation_list))
-        final_trip.update(make_selection('restraunt', restraunt_list))
-        final_trip.update(make_selection('entertainment', entertainment_list))
-
+        
         print('Here is the trip we have made for you: ' + str(final_trip))
         user_response = input('Would you like to confirm your trip? Enter y/n: ')
         
         if does_user_agree(user_response):
             print(f'Your trip has been confirmed! You will go to {final_trip.get("location")} on a {final_trip.get("transportation")}. There, you will {final_trip.get("entertainment")}, and afterwards go and eat at {final_trip.get("restraunt")}.')
             trip_confirmed = True
-        
+        else:
+            category_to_change = input('''What would you like to change?:
+            location
+            transportation
+            restraunt
+            entertainment
+            ''')
+            
+            final_trip.update(make_selection(category_to_change, category_lists.get(category_to_change)))
 
+        
 create_trip(list_of_locations, list_of_transportations, list_of_restraunts, list_of_entertainment)
 
 
