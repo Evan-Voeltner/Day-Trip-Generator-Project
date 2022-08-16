@@ -19,9 +19,8 @@ def does_user_agree(given_response):
     user_likes_selection = False
 
     while input_is_valid != True:
-        if current_response != 'y' or current_response != 'n':
-            given_response = input('Your response was invalid, please only type a "y" or "n": ')
-            break
+        if current_response != 'y' and current_response != 'n':
+            current_response = input('Your response was invalid, please only type a "y" or "n": ')
         else:
             input_is_valid = True
         
@@ -74,7 +73,7 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
             trip_confirmed = True
         
 
-
+create_trip(list_of_locations, list_of_transportations, list_of_restraunts, list_of_entertainment)
 
 
             
