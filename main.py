@@ -24,7 +24,7 @@ def does_user_agree(given_response):
         else:
             input_is_valid = True
         
-    if given_response == 'y':
+    if current_response == 'y':
         user_likes_selection = True
         
     return user_likes_selection
