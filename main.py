@@ -62,11 +62,9 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
     trip_confirmed = False
 
     print('We will plan your trip for you!')
-        
-    final_trip.update(make_selection('location', location_list))
-    final_trip.update(make_selection('transportation', transportation_list))
-    final_trip.update(make_selection('restraunt', restraunt_list))
-    final_trip.update(make_selection('entertainment', entertainment_list))
+    
+    for category in category_lists.keys():
+        final_trip.update(make_selection(category, category_lists.get(category)))
 
     while trip_confirmed != True:
         
@@ -95,13 +93,3 @@ def create_trip(location_list, transportation_list, restraunt_list, entertainmen
 
         
 create_trip(list_of_locations, list_of_transportations, list_of_restraunts, list_of_entertainment)
-
-
-            
-
-        
-
-    
-
-    
-    
