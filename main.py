@@ -11,6 +11,8 @@ def select_random(given_list):
     selected_item = random.sample(given_list, k=1)
     return(selected_item.pop())
 
+
+
 def does_user_agree(current_key, current_item):
     user_input = input(f'{current_item} has been selected as your {current_key}. Do you like this {current_key}? Enter y/n: ')
     input_is_valid = False
@@ -18,7 +20,7 @@ def does_user_agree(current_key, current_item):
 
     while input_is_valid != True:
         if user_input != 'y' or user_input != 'n':
-            print('Your response was invalid, please only type a "y" or "n": ')
+            user_input = input('Your response was invalid, please only type a "y" or "n": ')
             break
         else:
             input_is_valid = True
@@ -30,32 +32,47 @@ def does_user_agree(current_key, current_item):
 
 
 
+def make_selection(current_category, current_category_list):
+    current_selection = select_random(current_category_list)
+    selection_confirmed = False
+
+    while selection_confirmed != True:
+        if does_user_agree(current_category, current_selection):
+            print(f'{current_selection} has been selected as your {current_category}!')
+            return({current_category : current_selection})
+        else:
+            print(f'Sorry, we will find another {current_category}')
+            current_selection = select_random(current_category_list)
+
+
+
 def create_trip(location_list, transportation_list, restraunt_list, entertainment_list):
-    location_selection = select_random(location_list)
-    transportation_selection = select_random(transportation_list)
-    restraunt_selection = select_random(restraunt_list)
-    entertainment_selection = select_random(entertainment_list)
     final_trip = {
     'location': '',
     'transportation' : '',
     'restraunt': '',
     'entertainment': ''
     }  
+    
     trip_confirmed = False
 
-    while trip_confirmed != True:
+    print('We will plan your trip for you!')
 
-        if does_user_agree('location', location_selection):
-            final_trip.update({"location" : location_selection})
-            print(f'{location_selection} has been selected as your location!')
+    while trip_confirmed != True:
+        final_trip.update(make_selection('location', location_list))
+        final_trip.update(make_selection('transportation', transportation_list))
+        final_trip.update(make_selection('restraunt', restraunt_list))
+        final_trip.update(make_selection('entertainment', entertainment_list))
+
+
+
+
+
+            
 
         
 
     
 
     
-    print('We will plan your trip for you!')
-
-
-
-# print(select_random(list_of_destinations))
+    
